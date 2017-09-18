@@ -156,7 +156,9 @@ function roomba_initialize()
 
 	--update_status(nil)
 	--enable the serial output
-	gpio.mode(1,gpio.OUTPUT)
+	--gpio.mode(1,gpio.OUTPUT)
+	gpio.mode(0,gpio.OUTPUT)
+	gpio.mode(5,gpio.OUTPUT)
     roomba_serial_enable()
     uart.setup(0,115200,8,uart.PARITY_NONE,uart.STOPBITS_1,0)
     -- and set in passive mode just to be sure
