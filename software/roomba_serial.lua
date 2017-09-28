@@ -159,8 +159,8 @@ function roomba_initialize()
 	--gpio.mode(1,gpio.OUTPUT)
 	gpio.mode(0,gpio.OUTPUT)
 	gpio.mode(5,gpio.OUTPUT)
-    roomba_serial_enable()
     uart.setup(0,115200,8,uart.PARITY_NONE,uart.STOPBITS_1,0)
+    roomba_serial_enable()
     -- and set in passive mode just to be sure
     uart.write(0,128)
     --set up sensor monitoring
