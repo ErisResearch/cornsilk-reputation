@@ -1,7 +1,7 @@
 m= nil
-host = ""
-user = ""
-password = ""
+host = getconfigvalue("mqtt_server")
+user = getconfigvalue("mqtt_user")
+password = getconfigvalue("mqtt_password")
 command_topic = "roomba/command"
 status_topic = "roomba/status"
 

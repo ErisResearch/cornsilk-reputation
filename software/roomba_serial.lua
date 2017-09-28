@@ -18,11 +18,15 @@ function roomba_command_register(command, serial_bytes, status_bytes)
 	status_bytes_table[command] = status_bytes
 	end
 function roomba_serial_enable()
-	gpio.write(1,gpio.HIGH)
+	--GPIO 16 (0) and 14 (5),
+	gpio.write(0,gpio.HIGH)
+	gpio.write(5,gpio.LOW)
     end
 
 function roomba_serial_disable()
-	gpio.write(1,gpio.LOW)
+	--GPIO 16 (0) and 14 (5),
+	gpio.write(0,gpio.LOW)
+	gpio.write(5,gpio.LOW)
     end
 
 
@@ -135,6 +139,9 @@ function roomba_stuck()
     print "I'm stuck!"
     end
 
+function roomba_reset()
+    -- todo : play a song every 10 seconds until you're charging again
+    end
 
 
 function roomba_initialize()
@@ -145,10 +152,13 @@ function roomba_initialize()
 	roomba_command_register("CLEAN",roomba_clean,"CLEAN")
 	roomba_command_register("DOCK",roomba_dock,"DOCK")
 	roomba_command_register("STUCK",roomba_stuck,"STUCK")
+	roomba_command_register("RESET",roomba_reset,"RESET")
 
 	--update_status(nil)
 	--enable the serial output
-	gpio.mode(1,gpio.OUTPUT)
+	--gpio.mode(1,gpio.OUTPUT)
+	gpio.mode(0,gpio.OUTPUT)
+	gpio.mode(5,gpio.OUTPUT)
     roomba_serial_enable()
     uart.setup(0,115200,8,uart.PARITY_NONE,uart.STOPBITS_1,0)
     -- and set in passive mode just to be sure

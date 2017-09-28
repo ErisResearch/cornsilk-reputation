@@ -2,7 +2,8 @@ function finish_startup()
 	sntp.sync()
     dofile("roomba_serial.lua")
     dofile("mqtt_command.lua")
-	dofile("telnet.lua")
+    dofile("telnet.lua")
+    wifi.eventmon.unregister(wifi.eventmon.STA_GOT_IP)
     end
 
 function wifi_connect()
@@ -11,12 +12,16 @@ function wifi_connect()
 	wifi_password = getconfigvalue("wifikey")
 	hostname = getconfigvalue("hostname")
 
-	--print ("Connecting to "..ssid.." as "..hostname)
-    wifi.setmode(wifi.STATION)                                                          
-    wifi.sta.eventMonReg(wifi.STA_GOTIP, function() wifi.sta.eventMonStop() finish_startup() end)
-    wifi.sta.eventMonStart(100)
+    --print ("Connecting to "..ssid.." as "..hostname)
+    wifi.setmode(wifi.STATION)    
+    wifi_config = {}
+    wifi_config.ssid = getconfigvalue("ssid")
+    wifi_config.pwd = getconfigvalue("wifikey")
+    hostname = getconfigvalue("hostname")
+
+    wifi.eventmon.register(wifi.eventmon.STA_GOT_IP, finish_startup)
     wifi.sta.sethostname(hostname)
-    wifi.sta.config(ssid,wifi_password)
+    wifi.sta.config(wifi_config)
     end    
 
 function daily_restart()
