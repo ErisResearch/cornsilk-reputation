@@ -8,14 +8,10 @@ status_topic = "roomba/status"
 previous_message = nil
 
 function receive_message(client, topic, data)
-    -- print(topic ..":")
-    if data == previous_message then
-        --roomba_debug_print("Dropping echo")
-        previous_message = nil
-    elseif data ~=nil then
-        roomba_set_status(data)
-        end
-    end
+	if topic == command_topic then
+		roomba_set_status(data)
+	end
+end
 
 function post_connect(client)
     end
