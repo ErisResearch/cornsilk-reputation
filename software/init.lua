@@ -36,7 +36,7 @@ end
 function startup()
     node.setcpufreq(node.CPU160MHZ)
 	--restart every 24 hours
-	cron.schedule("0 9 * * *", daily_restart)
+	cron.schedule("0 13 * * *", daily_restart)
 --	tmr.register(6,3600000,tmr.ALARM_AUTO, daily_restart )
 --	tmr.start(6)
 	dofile("config.lua")
