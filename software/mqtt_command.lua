@@ -2,8 +2,8 @@ m= nil
 host = getconfigvalue("mqtt_server")
 user = getconfigvalue("mqtt_user")
 password = getconfigvalue("mqtt_password")
-command_topic = "roomba/command"
-status_topic = "roomba/status"
+command_topic = "desk/command"
+status_topic = "desk/status"
 
 previous_message = nil
 
