@@ -9,9 +9,11 @@ mutation = nil
 --   BUTTON DOWN = GPIO 14 (Index 5)
 
 function setOuputUpValue(val)
+	debug_print("Setting up output to ".. val)
 	gpio.write(0, val)
 end
 function setOuputDownValue(val)
+	debug_print("Setting down output to ".. val)
 	gpio.write(5, val)
 end
 
@@ -29,9 +31,11 @@ function transmute(outPin, inLevel)
 end
 
 function uptransmute(level, when, count)
+	debug_print("Up button pressed set to "..level)
 	transmute(0, level)
 end
 function downtransmute(level, when, count)
+	debug_print("Down button pressed set to "..level)
 	transmute(5, level)
 end
 
