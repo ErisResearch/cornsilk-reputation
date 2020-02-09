@@ -59,7 +59,6 @@ function startup()
 --	tmr.start(6)
 	dofile("config.lua")
 	loadconfig("config.json")
-	dofile("controlhook.lua")
     wifi_connect()
     end
 
@@ -70,3 +69,4 @@ hours_ticked = 0
 startupTimer = tmr.create()
 startupTimer:register(5000, tmr.ALARM_SINGLE,startup)
 startupTimer:start()
+dofile("controlhook.lua")
